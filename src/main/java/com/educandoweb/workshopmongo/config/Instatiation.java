@@ -28,6 +28,8 @@ public class Instatiation implements CommandLineRunner {
 	private User alex;
 	private User bob;
 	
+	private Post post1; 
+	private Post post2; 	
 	
 	private void DefineUsers() {
 		userRepository.deleteAll();
@@ -45,11 +47,13 @@ public class Instatiation implements CommandLineRunner {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
-		Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+		post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+		post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
-		
+
+		maria.getPosts().addAll(Arrays.asList(post1, post2));		
+		userRepository.save(maria);
 	}
 	
 	@Override
