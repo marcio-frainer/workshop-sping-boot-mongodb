@@ -49,4 +49,9 @@ public class PostService {
 		newObj.setDate(obj.getDate());
 		newObj.setTitle(obj.getTitle());
 	}
+	
+	public List<Post> findByTitle(String text) {
+		//return repo.findByTitleContainingIgnoreCase(text);
+		return repo.searchTitle(text);
+	}
 }
